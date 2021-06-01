@@ -1,0 +1,53 @@
+{
+  "name": "github-aws-backup",
+  "version": "1.0.0",
+  "author": "Cal Supik <cal.supik@gmail.com>",
+  "license": "MIT",
+  "description": "Backup all GitHub repositories to an AWS S3 bucket.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calsupik/github-aws-backup.git"
+  },
+  "keywords": [
+    "github",
+    "aws",
+    "backup"
+  ],
+  "bugs": {
+    "url": "https://github.com/calsupik/github-aws-backup/issues"
+  },
+  "homepage": "https://github.com/calsupik/github-aws-backup#readme",
+  "engines": {
+    "node": ">= 12"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "test": "NODE_ENV=test mocha -r ts-node/register --exit --recursive './src/**/*.spec.ts'"
+  },
+  "bin": {
+    "ghaws": "./dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "@types/nodegit": "^0.27.2",
+    "@types/tar": "^4.0.4",
+    "@types/uuid": "^8.3.0",
+    "gulp": "^4.0.2",
+    "gulp-insert": "^0.5.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "ts-node": "^10.0.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.918.0",
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "github-api": "^3.4.0",
+    "simple-git": "^2.39.0",
+    "tar": "^6.1.0",
+    "uuid": "^8.3.2"
+  }
+}
