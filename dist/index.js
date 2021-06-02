@@ -104,7 +104,7 @@ var github_1 = require("./libs/github");
                     _i++;
                     return [3 /*break*/, 2];
                 case 6:
-                    console.log("Successfully backed up your repos to:");
+                    console.log("Successfully backed up all repos to:");
                     console.log("s3://" + process.env.AWS_S3_BUCKET + "/" + fullPrefixBase.join('/'));
                     return [3 /*break*/, 9];
                 case 7:

@@ -56,7 +56,7 @@ function getOrgRepos() {
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    assert_1.default(DEFAULT_ORG, 'org should be set on default params');
+                    assert_1.default(DEFAULT_ORG, 'github org should be set in environment variables');
                     return [4 /*yield*/, exports.gh.getOrganization(DEFAULT_ORG)];
                 case 1:
                     org = _b.sent();
@@ -77,9 +77,9 @@ function cloneRepo(repo, target) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    assert_1.default(DEFAULT_ORG, 'org should be set on default params');
-                    assert_1.default(DEFAULT_USERNAME, 'username should be set on default params');
-                    assert_1.default(DEFAULT_TOKEN, 'token should be set on default params');
+                    assert_1.default(DEFAULT_ORG, 'github org should be set in environment variables');
+                    assert_1.default(DEFAULT_USERNAME, 'github username should be set in environment variables');
+                    assert_1.default(DEFAULT_TOKEN, 'github token should be set in environment variables');
                     remote = "https://" + DEFAULT_USERNAME + ":" + DEFAULT_TOKEN + "@github.com/" + DEFAULT_ORG + "/" + repo;
                     return [4 /*yield*/, simple_git_1.default().clone(remote, target)];
                 case 1:

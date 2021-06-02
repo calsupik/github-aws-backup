@@ -13,7 +13,7 @@ export const gh = new GitHub({
 })
 
 export async function getOrgRepos() {
-  assert(DEFAULT_ORG, 'org should be set on default params')
+  assert(DEFAULT_ORG, 'github org should be set in environment variables')
 
   const org = await gh.getOrganization(DEFAULT_ORG)
 
@@ -25,9 +25,12 @@ export async function getOrgRepos() {
 }
 
 export async function cloneRepo(repo: string, target: string) {
-  assert(DEFAULT_ORG, 'org should be set on default params')
-  assert(DEFAULT_USERNAME, 'username should be set on default params')
-  assert(DEFAULT_TOKEN, 'token should be set on default params')
+  assert(DEFAULT_ORG, 'github org should be set in environment variables')
+  assert(
+    DEFAULT_USERNAME,
+    'github username should be set in environment variables'
+  )
+  assert(DEFAULT_TOKEN, 'github token should be set in environment variables')
 
   // https://github.com/steveukx/git-js
   const remote = `https://${DEFAULT_USERNAME}:${DEFAULT_TOKEN}@github.com/${DEFAULT_ORG}/${repo}`

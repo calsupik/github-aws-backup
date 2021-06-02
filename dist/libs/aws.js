@@ -43,9 +43,11 @@ exports.uploadObject = exports.s3 = void 0;
 var assert_1 = __importDefault(require("assert"));
 var aws_sdk_1 = __importDefault(require("aws-sdk"));
 var DEFAULT_BUCKET = process.env.AWS_S3_BUCKET;
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
+var AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 exports.s3 = new aws_sdk_1.default.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: AWS_ACCESS_KEY,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
 });
 function uploadObject(name, data) {
     return __awaiter(this, void 0, void 0, function () {
@@ -53,7 +55,7 @@ function uploadObject(name, data) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    assert_1.default(DEFAULT_BUCKET, 'bucket should be set on default params');
+                    assert_1.default(DEFAULT_BUCKET, 'aws bucket should be set in environment variables');
                     params = {
                         Bucket: DEFAULT_BUCKET,
                         Key: name,
