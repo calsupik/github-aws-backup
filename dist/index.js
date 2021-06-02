@@ -72,22 +72,23 @@ var github_1 = require("./libs/github");
                 case 2:
                     if (!(_i < repos_1.length)) return [3 /*break*/, 6];
                     repo = repos_1[_i];
-                    console.log("Backing up repo \"" + repo.name + "\" to S3...");
+                    console.log("Starting backup for repo \"" + repo.name + "\"...");
                     if (fs_1.default.existsSync(repo.name + ".git"))
                         fs_1.default.rmSync(repo.name + ".git", { recursive: true });
                     if (fs_1.default.existsSync(repo.name + ".git.tar.gz"))
                         fs_1.default.rmSync(repo.name + ".git.tar.gz");
+                    console.log("Cloning repo \"" + repo.name + "\"...");
                     // https://github.com/steveukx/git-js
-                    return [4 /*yield*/, github_1.cloneRepo(repo.name, repo.name + ".git")
-                        // https://github.com/npm/node-tar
-                    ];
+                    return [4 /*yield*/, github_1.cloneRepo(repo.name, repo.name + ".git")];
                 case 3:
                     // https://github.com/steveukx/git-js
                     _a.sent();
+                    console.log("Compressing repo \"" + repo.name + "\"...");
                     // https://github.com/npm/node-tar
                     tar_1.default.c({ gzip: true, sync: true, file: repo.name + ".git.tar.gz" }, [
                         repo.name + ".git",
                     ]);
+                    console.log("Uploading repo \"" + repo.name + "\" to S3...");
                     filePathInBucket = __spreadArray(__spreadArray([], fullPrefixBase), [repo.name + ".git.tar.gz"]);
                     fileData = fs_1.default.readFileSync(repo.name + ".git.tar.gz");
                     return [4 /*yield*/, aws_1.uploadObject(filePathInBucket.join('/'), fileData)];
@@ -97,12 +98,13 @@ var github_1 = require("./libs/github");
                         fs_1.default.rmSync(repo.name + ".git", { recursive: true });
                     if (fs_1.default.existsSync(repo.name + ".git.tar.gz"))
                         fs_1.default.rmSync(repo.name + ".git.tar.gz");
+                    console.log("Successfully backed up repo \"" + repo.name + "\"!");
                     _a.label = 5;
                 case 5:
                     _i++;
                     return [3 /*break*/, 2];
                 case 6:
-                    console.log("Successfully saved your repos to:");
+                    console.log("Successfully backed up your repos to:");
                     console.log("s3://" + process.env.AWS_S3_BUCKET + "/" + fullPrefixBase.join('/'));
                     return [3 /*break*/, 9];
                 case 7:

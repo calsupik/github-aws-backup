@@ -59,11 +59,9 @@ function uploadObject(name, data) {
                         Key: name,
                         Body: data,
                     };
-                    console.log('before', name, data);
                     return [4 /*yield*/, exports.s3.putObject(params).promise()];
                 case 1:
                     response = _a.sent();
-                    console.log('response', response);
                     return [2 /*return*/, response];
             }
         });
